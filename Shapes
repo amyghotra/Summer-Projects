@@ -1,0 +1,18 @@
+from turtle import *
+
+def polygon(number_of_sides, side_length, color):
+	penup()
+	forward(2)
+	pencolor(color)
+	pendown()
+	for i in range (6):
+		forward(2)
+		right(360/ number_of_sides)
+		for i in range (6):
+			forward(side_length)
+			right(360/ number_of_sides)
+
+polygon(6, 50,"yellow")
+
+
+getscreen()._root.mainloop()
