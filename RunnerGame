@@ -1,0 +1,150 @@
+import pygame
+import random
+from city_scroller import Scroller
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREY = (129, 129, 129)
+PINK = (255, 192, 203)
+LAVENDER = (0, 128, 128)
+colors = [BLACK, WHITE, GREEN, RED, BLUE, GREY, PINK]
+
+# def random_color():
+	# return random.choice(colors)
+
+
+pygame.init()
+
+pygame.display.set_caption("CityScroller")
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+# Loop until the user clicks the close button.
+done = False
+
+# Used to manage how fast the screen updates
+clock = pygame.time.Clock()
+
+class RunnerSprite(pygame.sprite.Sprite):
+	def __init__(self, colors, width, height):
+		pygame.sprite.Sprite.__init__(self)
+		self.colors = colors
+		self.width = width
+		self.height = height
+		self.image = pygame.Surface([width, height])
+		self.rect = self.image.get_rect()
+		self.image.fill(colors)
+	def update(self):
+		self.rect.x -= 1 
+		if self.rect.x <= 0:
+			self.rect.x = (SCREEN_WIDTH + 10)
+			self.rect.y = random.randint(1, 550)
+	
+# 	def draw(self):
+# 		pygame.draw.circle(screen, WHITE, self.position, self.size)
+	
+		
+
+
+all_sprites_list = pygame.sprite.Group()
+
+PLAYER_1_SPRITE = RunnerSprite(WHITE, 30, 10)
+all_sprites_list.add(PLAYER_1_SPRITE)
+
+good_sprite_list = pygame.sprite.Group()
+
+bad_sprite_list = pygame.sprite.Group()
+
+for i in range (10):
+	GOOD_1_SPRITE = RunnerSprite(GREY, 15, 15)
+	GOOD_1_SPRITE.rect.x = random.randint(0,800)
+	GOOD_1_SPRITE.rect.y = random.randint(0, 550)
+	good_sprite_list.add(GOOD_1_SPRITE)
+	all_sprites_list.add(GOOD_1_SPRITE)
+for i in range (100):
+	BAD_SPRITE = RunnerSprite(LAVENDER, 15, 15)
+	BAD_SPRITE.rect.x = random.randint(0,800)
+	BAD_SPRITE.rect.y = random.randint(0, 550)
+	bad_sprite_list.add(BAD_SPRITE)
+	all_sprites_list.add(BAD_SPRITE)
+
+# collide_rect, collide_PLAYER_1_SPRITE_ratio, collide_BAD_SPRITE,
+# collide_BAD_SPRITE_ratio, collide_mask
+
+# blocks_hit_list = pygame.sprite.spritecollide(PLAYER_1_SPRITE, good_sprite_list, True)
+# score = 0 
+# for GOOD_1_SPRITE in blocks_hit_list:
+# 		score +=1
+
+def message_display(text):
+	largeText = pygame.font.Font('freesansbold.ttf',115)
+	TextSurf, TextRect = text_objects(text, largeText)
+	TextRect.center = ((display_width/2),(display_height/2))
+	gameDisplay.blit(TextSurf, TextRect)
+
+	pygame.display.update()
+
+
+FRONT_SCROLLER_COLOR = (PINK)
+MIDDLE_SCROLLER_COLOR = (30,30,100)
+BACK_SCROLLER_COLOR = (50,50,150)
+BACKGROUND_COLOR = (167, 219, 216)
+
+front_scroller = Scroller(SCREEN_WIDTH, 400, SCREEN_HEIGHT, FRONT_SCROLLER_COLOR, 3)
+middle_scroller = Scroller(SCREEN_WIDTH, 200, (SCREEN_HEIGHT - 50), MIDDLE_SCROLLER_COLOR, 2)
+back_scroller = Scroller(SCREEN_WIDTH, 20, (SCREEN_HEIGHT - 100), BACK_SCROLLER_COLOR, 1)
+
+done=False
+
+# -------- Main Program Loop -----------
+while not done:
+	# --- Main event loop
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			done = True
+
+   
+	screen.fill(BACKGROUND_COLOR)
+
+	# --- Drawing code should go here
+
+	back_scroller.draw_buildings(screen)
+	back_scroller.move_buildings()
+	middle_scroller.draw_buildings(screen)
+	middle_scroller.move_buildings()
+	front_scroller.draw_buildings(screen)
+	front_scroller.move_buildings()
+
+	# for location in sprite_pos:
+	xpos = pygame.mouse.get_pos()
+
+
+	PLAYER_1_SPRITE.rect.x = xpos[0]
+	PLAYER_1_SPRITE.rect.y = xpos[1]
+	
+	good_sprite_list.update()
+	bad_sprite_list.update()
+	all_sprites_list.draw(screen)
+
+	blocks_hit_list = pygame.sprite.spritecollide(PLAYER_1_SPRITE, good_sprite_list, True)
+	score = 0 
+	for GOOD_1_SPRITE in blocks_hit_list:
+		score +=1
+	blocks_hit_list = pygame.sprite.spritecollide(PLAYER_1_SPRITE, bad_sprite_list, True)
+	score = 0 
+	for BAD_SPRITE in blocks_hit_list:
+		score -=1
+
+
+
+	pygame.display.flip()
+
+	clock.tick(60)
+
+pygame.quit()
+exit()
