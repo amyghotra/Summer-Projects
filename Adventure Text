@@ -1,0 +1,63 @@
+print ("It is late at night, and you are on your way home from the train station")
+print ("start")
+print ("Type 'left' to go left or 'right' to go right.")
+answer = input("left or right") 
+if answer == "left":
+     print ("You decided to go left and after a mile of walking there is two crocodiles in your way. Would you rather '1' try and fight the crocs...or...'2'run to a nearby cemetary until they go away?")
+     answer = input ("1 or 2")
+     if answer == "1":
+          print("You try to be smart and fight the crocs, and you get bitten")
+          print ("End of story")
+     if answer == "2":
+         print ("You decide to run to a neaarby cemetary, where you stay until 2 a.m.")      
+         print ("End of story")
+     else:
+            print ("please input '1' or '2'.")
+            answer= input ("1 or 2")
+            if answer == "1":
+                print("You try to be smart and fight the crocs, and you get bitten")
+                print ("End of story")
+            if answer == "2":
+                 print ("You decide to run to a neaarby cemetary, where you stay until 2 a.m.")      
+                 print ("End of story")
+if answer == "right":
+    print ("You decided to go right and after a mile of walking you walk into a crime scene where cops tell you that you can't pass. Would you rather '1' tell the cops that it is getting really late and you have to get home, or '2' wait until you are allowed to pass through?")
+    answer = input ("1 or 2")
+    if answer == "1":
+        print("The police say that you aren't the only one who has to go home, so you end up wating a couple of hours anyway")
+        print ("End of story")
+    if answer == "2":
+        print ("You get home at 4 a.m.")
+        print ("End of game")
+    else:
+        print ("please input '1' or '2'.")
+        answer= input ("1 or 2")
+        if answer == "1":
+            print("The police say that you aren't the only one who has to go home, so you end up wating a couple of hours anyway")
+            print ("End of story")
+        if answer == "2":
+            print ("You get home at 4 a.m.")
+            print ("End of game")
+        
+else:
+    print ("please input 'left' or 'right'.")
+    answer= input ("left or right")    
+    
+    if answer == "left":
+     print ("You decided to go left and after a mile of walking there is two crocodiles in your way. Would you rather '1' try and fight the crocs...or...'2'run to a nearby cemetary until they go away?")
+     answer = input ("1 or 2")
+     if answer == "1":
+          print("You try to be smart and fight the crocs, and you get bitten")
+          print ("End of story")
+     if answer == "2":
+         print ("You decide to run to a neaarby cemetary, where you stay until 2 a.m.")      
+         print ("End of story")
+if answer == "right":
+    print ("You decided to go right and after a mile of walking you walk into a crime scene where cops tell you that you can't pass. Would you rather '1' tell the cops that it is getting really late and you have to get home, or '2' wait until you are allowed to pass through?")
+    answer = input ("1 or 2")
+    if answer == "1":
+        print("The police say that you aren't the only one who has to go home, so you end up wating a couple of hours anyway")
+        print ("End of story")
+    if answer == "2":
+        print ("You get home at 4 a.m.")
+        print ("End of game")
